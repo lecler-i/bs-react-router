@@ -1,4 +1,4 @@
-type renderFunc = 
+type renderFunc =
   {
     .
     "_match": Js.Dict.t(string),
@@ -7,7 +7,7 @@ type renderFunc =
   } =>
   ReasonReact.reactElement;
 
-let optionToBool = (optional) => 
+let optionToBool = (optional) =>
   switch optional {
   | Some(_) => true
   | _ => false
@@ -37,8 +37,24 @@ module Route = {
 
 module NavLink = {
   [@bs.module "react-router-dom"] external navLink : ReasonReact.reactClass = "NavLink";
-  let make = (~_to: string, children) =>
-    ReasonReact.wrapJsForReason(~reactClass=navLink, ~props={"to": _to}, children);
+  let make =
+      (
+        ~_to: string,
+        ~activeClassName: option(string)=?,
+        ~style: option(ReactDOMRe.style)=?,
+        ~activeStyle: option(ReactDOMRe.style)=?,
+        children
+      ) =>
+    ReasonReact.wrapJsForReason(
+      ~reactClass=navLink,
+      ~props={
+        "to": _to,
+        "activeClassName": Js.Null_undefined.from_opt(activeClassName),
+        "style": Js.Null_undefined.from_opt(style),
+        "activeStyle": Js.Null_undefined.from_opt(activeStyle)
+      },
+      children
+    );
 };
 
 module BrowserRouter = {
