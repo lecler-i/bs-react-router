@@ -28,7 +28,7 @@ let make = (_children) => {
     render: (_self) =>
         <div>
             <BrowserRouter>
-                <Switch>
+                <div>
                     <h1>{ReasonReact.stringToElement("Using NavLink")}</h1>
                     <NavLink _to="/">{ReasonReact.stringToElement("Home")}</NavLink>
                     <NavLink style=(blueStyle) _to="/user">{ReasonReact.stringToElement("User")}</NavLink>
@@ -37,9 +37,11 @@ let make = (_children) => {
                     <Link _to="/">{ReasonReact.stringToElement("Home")}</Link>
                     <Link style=(blueStyle) _to="/user">{ReasonReact.stringToElement("User")}</Link>
 
-                    <Route path="/" exact=true component=(() => <HomePage />) />
-                    <Route path="/user" component=(() => <UserPage />) />
-                </Switch>
+                    <Switch>
+                        <Route path="/" exact=true component=(() => <HomePage />) />
+                        <Route path="/user" component=(() => <UserPage />) />
+                    </Switch>
+                </div>
             </BrowserRouter>
         </div>
 };
