@@ -28,13 +28,18 @@ let make = (_children) => {
     render: (_self) =>
         <div>
             <BrowserRouter>
-                <div>
+                <Switch>
+                    <h1>{ReasonReact.stringToElement("Using NavLink")}</h1>
                     <NavLink _to="/">{ReasonReact.stringToElement("Home")}</NavLink>
-                    <NavLink _to="/user" style=(blueStyle)>{ReasonReact.stringToElement("User")}</NavLink>
+                    <NavLink style=(blueStyle) _to="/user">{ReasonReact.stringToElement("User")}</NavLink>
+
+                    <h1>{ReasonReact.stringToElement("Using Link")}</h1>
+                    <Link _to="/">{ReasonReact.stringToElement("Home")}</Link>
+                    <Link style=(blueStyle) _to="/user">{ReasonReact.stringToElement("User")}</Link>
 
                     <Route path="/" exact=true component=(() => <HomePage />) />
                     <Route path="/user" component=(() => <UserPage />) />
-                </div>
+                </Switch>
             </BrowserRouter>
         </div>
 };
